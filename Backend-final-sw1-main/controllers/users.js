@@ -6,92 +6,92 @@ import Role from "../models/Role.js";
 import Address from "../models/Address.js";
 
 const validate = (params, action) => {
-	if (
-		action === "POST" &&
-		(
-			!params.name ||
-			!params.lastname ||
-			!params.email ||
-			!params.password
-		)
-	)
-		return false;
-	const name = params.name
-		? validator.isLength(params.name, { min: 1, max: 40 })
-		: null;
-	const lastname = params.lastname
-		? validator.isLength(params.name, { min: 1, max: 40 })
-		: null;
-	const email = params.email ? validator.isEmail(params.email) : null;
-	const pwd = params.password
-		? validator.isLength(params.password, { min: 8, max: 20 })
-		: null;
-	const active = params.active ? validator.isBoolean(params.active) : null;
-	const avatar = params.avatar
-		? validator.isLength(params.avatar, { min: 21 })
-		: null;
-	if (params.name && !name) return false;
-	if (params.lastname && !lastname) return false;
-	if (params.email && !email) return false;
-	if (params.current_password && !pwd) return false;
-	if (params.active && !active) return false;
-	if (params.avatar && !avatar) return false;
-	return true;
+    if (
+        action === "POST" &&
+        (
+            !params.name ||
+            !params.lastname ||
+            !params.email ||
+            !params.password
+        )
+    )
+        return false;
+    const name = params.name
+        ? validator.isLength(params.name, { min: 1, max: 40 })
+        : null;
+    const lastname = params.lastname
+        ? validator.isLength(params.name, { min: 1, max: 40 })
+        : null;
+    const email = params.email ? validator.isEmail(params.email) : null;
+    const pwd = params.password
+        ? validator.isLength(params.password, { min: 8, max: 20 })
+        : null;
+    const active = params.active ? validator.isBoolean(params.active) : null;
+    const avatar = params.avatar
+        ? validator.isLength(params.avatar, { min: 21 })
+        : null;
+    if (params.name && !name) return false;
+    if (params.lastname && !lastname) return false;
+    if (params.email && !email) return false;
+    if (params.current_password && !pwd) return false;
+    if (params.active && !active) return false;
+    if (params.avatar && !avatar) return false;
+    return true;
 };
 
 const CREATE = async (req, res) => {
-	const params = req.body;
-	if (req.file) {
-		const file = req.file;
-		params.avatar = file.path;
-	}
-	if (!req.file && updateParams.avatar !== undefined && updateParams.avatar === ""){
-		return res.status(400).json({
-			status: 400,
-			type: "error",
-			message: "File couldn't be uploaded",
-		});
-	}
-	if (!validate(params, "POST")) {
-		if (
-			params.avatar &&
-			params.avatar != "uploads/avatar/default.png"
-		)
-			await fs.unlink(params.avatar);
-		return res.status(400).json({
-			status: 400,
-			type: "error",
-			message: "Missing or incorrect data",
-		});
-	}
-	try {
-		if (params.role){
-			params.role = await Role.findById(params.role);
-		}
-		if (params.address) {
-			params.address = await Address.findById(params.address);
-		}
-		const user = new User(params);
-		await user.save();
-		return res.status(200).json({
-			status: 200,
-			type: "info",
-			message: "User saved successfully",
-			user: user,
-		});
-	} catch (e) {
-		if (
-			params.avatar &&
-			params.avatar != "uploads/avatar/default.png"
-		)
-			await fs.unlink(params.avatar);
-		return res.status(400).json({
-			status: 400,
-			type: "error",
-			message: "User couldn't be saved",
-			details: e,
-		});
-	}
+    const params = req.body;
+    if (req.file) {
+        const file = req.file;
+        params.avatar = file.path;
+    }
+    if (!req.file && params.avatar !== undefined && updateParams.avatar === ""){
+        return res.status(400).json({
+            status: 400,
+            type: "error",
+            message: "File couldn't be uploaded",
+        });
+    }
+    if (!validate(params, "POST")) {
+        if (
+            params.avatar &&
+            params.avatar != "uploads/avatar/default.png"
+        )
+            await fs.unlink(params.avatar);
+        return res.status(400).json({
+            status: 400,
+            type: "error",
+            message: "Missing or incorrect data",
+        });
+    }
+    try {
+        if (params.role){
+            params.role = await Role.findById(params.role);
+        }
+        if (params.address) {
+            params.address = await Address.findById(params.address);
+        }
+        const user = new User(params);
+        await user.save();
+        return res.status(200).json({
+            status: 200,
+            type: "info",
+            message: "User saved successfully",
+            user: user,
+        });
+    } catch (e) {
+        if (
+            params.avatar &&
+            params.avatar != "uploads/avatar/default.png"
+        )
+            await fs.unlink(params.avatar);
+        return res.status(400).json({
+            status: 400,
+            type: "error",
+            message: "User couldn't be saved",
+            details: e,
+        });
+    }
 }
 
 const READ_ALL = async (req, res) => {

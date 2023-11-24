@@ -28,7 +28,7 @@ const uploads = multer({storage: storage, fileFilter: fileFilter});
 import { CREATE, DELETE, READ_ALL, READ_BY_MAIL, UPDATE } from "../controllers/users.js";
 
 
-router.post("/new", [uploads.single("avatar")], CREATE);
+router.post("/new", /*[uploads.single("avatar")],*/ CREATE);
 router.get("/", READ_ALL);
 router.get("/:mail", READ_BY_MAIL);
 router.patch("/:mail", [uploads.single("avatar")], UPDATE);
