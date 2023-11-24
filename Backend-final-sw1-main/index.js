@@ -36,7 +36,6 @@ const start = async () => {
 		app.use(cors());
 
 		app.use("/docs", docsRoutes);
-
 		app.use("/api/v1/users", userRoutes);
 		app.use("/api/v1/addresses", addressRoutes);
 		app.use("/api/v1/roles", roleRoutes);
