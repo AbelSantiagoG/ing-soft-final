@@ -34,6 +34,8 @@ const start = async () => {
 		app.use(express.static(path.join(__dir, "docs")));
 
 		app.use(cors());
+		
+		app.use(express.json());
 
 		app.use("/docs", docsRoutes);
 
