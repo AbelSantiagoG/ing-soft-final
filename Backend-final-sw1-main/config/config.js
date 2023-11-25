@@ -1,3 +1,3 @@
 export const DB_USER = 'admin_user';
-export const DB_PASSWORD = 'cr7elmejormessiesmalo';
-export const DB_HOST = 'cluster0.wii8fsp.mongodb.net';
+export const DB_PASSWORD = 'Soyfeliz13';
+export const DB_HOST = 'cluster0.pepu0zt.mongodb.net/';

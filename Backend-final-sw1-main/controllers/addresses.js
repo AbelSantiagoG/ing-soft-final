@@ -137,7 +137,7 @@ const UPDATE = async (req, res) => {
 const DELETE = async (req, res) => {
 	const id = req.params.id;
 	try {
-		const address = Address.findByIdAndDelete(id);
+		const address =  await Address.findByIdAndDelete(id);
 		return res.status(200).json({
 			status: 200,
 			type: "info",

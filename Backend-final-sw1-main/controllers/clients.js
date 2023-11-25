@@ -26,7 +26,7 @@ const CREATE = async (req, res) => {
 		const file = req.file;
 		params.avatar = file.path;
 	}
-	if (!req.file && updateParams.avatar !== undefined && updateParams.avatar === ""){
+	if (!req.file && params.avatar !== undefined && params.avatar === ""){
 		return res.status(400).json({
 			status: 400,
 			type: "error",
@@ -74,7 +74,7 @@ const CREATE = async (req, res) => {
 
 const READ_ALL = async (req, res) => {
 	try {
-		const clients = await Client.find({});
+		const clients = await Client.find({}).populate('address');
 		return res.status(200).send(clients);
 	} catch (e) {
 		return res.status(400).json({
@@ -89,7 +89,7 @@ const READ_ALL = async (req, res) => {
 const READ_BY_ID = async (req, res) => {
 	const id = req.params.id;
 	try {
-		const client = await Client.findById(id);
+		const client = await Client.findById(id).populate('address');
 		if (!client) {
 			return res.status(404).json({
 				status: 404,

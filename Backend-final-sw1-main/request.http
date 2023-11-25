@@ -4,9 +4,154 @@ POST http://localhost:3100/api/v1/users/new HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"user1",
-    "lastname":"lastname1",
-    "email":"user1@gmail.com",
-    "password":"123",
-    "addresss":"caldas1"
+    "name":"user",
+    "lastname":"lastname",
+    "email":"user2@gmail.com",
+    "password":"4321",
+    "address":"65621ded044e87c92e0c9dab",
+    "role": "6562315fa71953aaa9ed156d"
 }
+
+###
+GET http://localhost:3100/api/v1/users/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/users/user2@gmail.com
+
+
+//adresses
+###
+POST http://localhost:3100/api/v1/addresses/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "country": "colombia",
+    "department": "caldas",
+    "municipality": "manizales",
+    "nomenclature": "abcde"
+}
+
+###
+GET http://localhost:3100/api/v1/addresses/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/addresses/65621981b57253fe19381013 HTTP/1.1
+
+//cliente
+###
+POST http://localhost:3100/api/v1/clients/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "juanito alcachofa",
+    "address": "65621ded044e87c92e0c9dab"
+}
+
+###
+GET http://localhost:3100/api/v1/clients/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/clients/65621f351fe21461280d2042 HTTP/1.1
+
+//provedor
+###
+POST http://localhost:3100/api/v1/providers/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "pepito picapiedra",
+    "address": "65621ded044e87c92e0c9dab"
+}
+
+###
+GET http://localhost:3100/api/v1/providers/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/providers/656222684a8473d615510383 HTTP/1.1
+
+
+//aliado
+###
+POST http://localhost:3100/api/v1/allies/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "juanita florecita",
+    "address": "65621ded044e87c92e0c9dab"
+}
+
+###
+GET http://localhost:3100/api/v1/allies/ HTTP/1.1
+
+###
+DELETE  http://localhost:3100/api/v1/allies/65622f8f6fa67910e5051112 HTTP/1.1
+
+
+//sede
+###
+POST http://localhost:3100/api/v1/sedes/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "san jorge",
+    "address": "65621ded044e87c92e0c9dab",
+    "contact": "310458332"
+}
+
+###
+GET  http://localhost:3100/api/v1/sedes/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/sedes/65622c09e75ca3268979c663 HTTP/1.1
+
+//categoria
+###
+POST http://localhost:3100/api/v1/categories/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "mecato",
+    "description": "aperitivos para pasar el rato",
+    "active": "true"
+}
+
+###
+GET http://localhost:3100/api/v1/categories/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/categories/6562280294f7c11902f3268a HTTP/1.1
+
+//servicio
+###
+POST http://localhost:3100/api/v1/services/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "papas",
+    "category": "6562297394f7c11902f32699",
+    "description": "deliciosas papitas",
+    "active": "true"
+}
+
+###
+GET http://localhost:3100/api/v1/services/ HTTP/1.1
+
+###
+DELETE  http://localhost:3100/api/v1/services/656230a52d34abefd72ecfc2 HTTP/1.1
+
+//rol
+###
+POST http://localhost:3100/api/v1/roles/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "vendedor",
+    "description": "es el que realiza las ventas",
+    "active": "true"
+}
+
+###
+GET http://localhost:3100/api/v1/roles/ HTTP/1.1
+
+###
+DELETE http://localhost:3100/api/v1/roles/65622a2494f7c11902f326a2 HTTP/1.1
