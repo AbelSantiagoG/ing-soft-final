@@ -58,7 +58,7 @@ const CREATE = async (req, res) => {
 
 const READ_ALL = async (req, res) => {
 	try {
-		const sedes = await Sede.find({});
+		const sedes = await Sede.find({}).populate('address');
 		return res.status(200).send(sedes);
 	} catch (e) {
 		return res.status(400).json({
@@ -71,25 +71,36 @@ const READ_ALL = async (req, res) => {
 };
 
 const READ_BY_ID = async (req, res) => {
-	const id = req.params.id;
-	if (!id) {
-		return res.status(400).json({
-			status: 400,
-			type: "error",
-			message: "ID not received",
-		});
-	}
-	try {
-		const sede = await Sede.findById(id);
-		return res.status(200).send(sede);
-	} catch (e) {
-		return res.status(400).json({
-			status: 400,
-			type: "error",
-			message: "Can not get sede",
-			details: e.message,
-		});
-	}
+    const id = req.params.id;
+    
+    if (!id) {
+        return res.status(400).json({
+            status: 400,
+            type: "error",
+            message: "ID not received",
+        });
+    }
+
+    try {
+        const sede = await Sede.findById(id).populate('address');
+
+        if (!sede) {
+            return res.status(404).json({
+                status: 404,
+                type: "error",
+                message: "Sede not found",
+            });
+        }
+
+        return res.status(200).send(sede);
+    } catch (e) {
+        return res.status(400).json({
+            status: 400,
+            type: "error",
+            message: "Can not get sede",
+            details: e.message,
+        });
+    }
 };
 
 const UPDATE = async (req, res) => {

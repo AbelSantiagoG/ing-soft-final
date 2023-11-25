@@ -38,6 +38,7 @@ const start = async () => {
 		app.use(express.json());
 
 		app.use("/docs", docsRoutes);
+
 		app.use("/api/v1/users", userRoutes);
 		app.use("/api/v1/addresses", addressRoutes);
 		app.use("/api/v1/roles", roleRoutes);
